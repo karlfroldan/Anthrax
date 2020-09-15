@@ -24,3 +24,5 @@ Then, create a pull request to pull your branch to the `release` branch. I will 
 The purpose of this is since we're working separately, if we both work on the `release` branch at the same time, or if we have our "own" branches but we will only commit when it's
 finished, there will be merge conflicts after. Therefore, only one person should work on one file to avoid merge conflicts. If you see something wrong with my code, tell me instead
 of fixing the bug as that will result to merge conflicts which are a huge pain in the ass.
+
+Please commit as much as possible and start a pull request as much as possible(but do not merge as that may create conflicts) so we'll both be updated as much as possible.
