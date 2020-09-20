@@ -18,9 +18,13 @@ public class EnemySpawner : MonoBehaviour
 
     // collection of enemy prefabs
     public GameObject[] enemies;
+    // the attached waypoint we have.
+    public GameObject attachedWaypoint;
     private Vector3 enposition = new Vector3(0, 0, 0);
 
     private int numEnemy = 0;
+
+    public float waypointDistanceThreshold = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +43,17 @@ public class EnemySpawner : MonoBehaviour
         {
             // we instantiate a random enemy(chosen from the Unity editor)
             int enemyIndex = Random.Range(0, enemies.Length);
-            Instantiate(enemies[enemyIndex], enposition, transform.rotation);
-            // increase the number of enemy
+            GameObject newEnemy = (GameObject) Instantiate(enemies[enemyIndex], enposition, transform.rotation);
+
+            SpawnerWaypoint newEnemyWaypoint = newEnemy.AddComponent<SpawnerWaypoint>();
+            // attach waypoint to the spawner
+            newEnemyWaypoint.waypoint = attachedWaypoint;
+
+            GenericEnemyMove enemyMove = newEnemy.AddComponent<GenericEnemyMove>();
+            enemyMove.waypointDistanceThreshold = waypointDistanceThreshold;
+            enemyMove.Move();
+            // attach the game object to the new enemy
+
             ++numEnemy;
             Debug.Log("numEnemy: " + numEnemy);
         }
