@@ -31,7 +31,6 @@ public class EnemySpawner : MonoBehaviour
     {
         // set the position of the enposition
         enposition = gameObject.transform.position;
-        Debug.Log("Current Position: " + gameObject.transform.position);
         // start calling the Spawn function repeatedly after a delay
         InvokeRepeating("addEnemy", spawnDelay, spawnTime);
     }
@@ -44,18 +43,8 @@ public class EnemySpawner : MonoBehaviour
             // we instantiate a random enemy(chosen from the Unity editor)
             int enemyIndex = Random.Range(0, enemies.Length);
             GameObject newEnemy = (GameObject) Instantiate(enemies[enemyIndex], enposition, transform.rotation);
-
-            SpawnerWaypoint newEnemyWaypoint = newEnemy.AddComponent<SpawnerWaypoint>();
-            // attach waypoint to the spawner
-            newEnemyWaypoint.waypoint = attachedWaypoint;
-
-            GenericEnemyMove enemyMove = newEnemy.AddComponent<GenericEnemyMove>();
-            enemyMove.waypointDistanceThreshold = waypointDistanceThreshold;
-            enemyMove.Move();
-            // attach the game object to the new enemy
-
+            
             ++numEnemy;
-            Debug.Log("numEnemy: " + numEnemy);
         }
     }
 }
