@@ -59,6 +59,7 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
+'Anthrax Infernal Doom.exe'
 
 # Crashlytics generated file
 crashlytics-build.properties
