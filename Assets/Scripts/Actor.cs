@@ -78,6 +78,8 @@ public class Actor : MonoBehaviour
         while(targetActor.shield >= 0f && health >= 0)
         {
             // attack the target
+            if(team == 0)
+                EnemyAttack();
             targetActor.HitShield(hitpoints);
 
             // we weaken the hitpoint since shields make the hitpoints stronger
@@ -100,6 +102,8 @@ public class Actor : MonoBehaviour
         // capable of destroying
         while(targetActor.health >= 0f && health >= 0)
         {
+            if(team == 0)
+                EnemyAttack();
             // attack the target
             // we weaken the hitpoint since shields make the hitpoints stronger
             targetActor.HitHealth(hitpoints);
@@ -145,5 +149,11 @@ public class Actor : MonoBehaviour
         Debug.Log("Actor Destroyed");
         if(actor.GetComponent<Actor>().team == 1)
             actor.GetComponent<DestroyCity>().CityDestroyed();
+    }
+
+    void EnemyAttack()
+    {
+        transform.position += transform.forward * Time.deltaTime * 1.2f;
+        transform.position -= transform.forward * Time.deltaTime * 1.2f;
     }
 }
