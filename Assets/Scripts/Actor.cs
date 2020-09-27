@@ -75,7 +75,7 @@ public class Actor : MonoBehaviour
     {
         Actor targetActor = target.GetComponent<Actor>();
 
-        while(targetActor.shield >= 0f )
+        while(targetActor.shield >= 0f && health >= 0)
         {
             // attack the target
             targetActor.HitShield(hitpoints);
@@ -89,7 +89,16 @@ public class Actor : MonoBehaviour
         // prevent it from well... bugging lol
         targetActor.shield = 0f;
 
-        while(targetActor.health >= 0f )
+        // since house is pretty much the only thing that can be destroyed
+        // in-game for team 1, we use house
+        if(targetActor.team == 1)
+        {
+            target.GetComponent<DestroyCity>().ShieldDestroyed();
+        }
+
+        // as long as the health of our actor is still above 0, it is still
+        // capable of destroying
+        while(targetActor.health >= 0f && health >= 0)
         {
             // attack the target
             // we weaken the hitpoint since shields make the hitpoints stronger
@@ -99,7 +108,7 @@ public class Actor : MonoBehaviour
             targetActor.GetStats();
         }
 
-        targetActor.DestroyActor();
+        targetActor.DestroyActor(target);
     }
 
     void Attack(GameObject target)
@@ -112,7 +121,6 @@ public class Actor : MonoBehaviour
 
     public void GetStats()
     {
-        Debug.Log("Name: " + gameObject.name);
         Debug.Log("Health: " + health);
         Debug.Log("Shield: " + shield);
     }
@@ -127,10 +135,15 @@ public class Actor : MonoBehaviour
     {
         Debug.Log("Health targeted!");
         health = health - hitpoints;
+
+        // since the house is pretty much the only team that
+        // can be destroyed, we use house
     }
 
-    public void DestroyActor()
+    public void DestroyActor(GameObject actor)
     {
         Debug.Log("Actor Destroyed");
+        if(actor.GetComponent<Actor>().team == 1)
+            actor.GetComponent<DestroyCity>().CityDestroyed();
     }
 }

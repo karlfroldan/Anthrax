@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 265540136}
   - component: {fileID: 265540138}
   - component: {fileID: 265540139}
+  - component: {fileID: 265540140}
   m_Layer: 0
   m_Name: House_1
   m_TagString: Untagged
@@ -443,7 +444,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cc91545abf9635f45900bf42ab205395, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87f8bf0cb74e3f74b8ba83a53f51a1da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -462,8 +463,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265540135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.28, y: -1.74, z: -0.18}
-  m_LocalScale: {x: 0.10831509, y: 0.090358876, z: 0.17494275}
+  m_LocalPosition: {x: 7.45, y: -1.43, z: -3}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -507,12 +508,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
-  shield: 200
+  shield: 50
   health: 100
   attackRate: 1
   hitpoints: 0
   enemies: []
   instanceName: House_Target
+--- !u!114 &265540140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265540135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8202d8cdd95166146b652796121919bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 265540136}
+  noShieldSprite: {fileID: 21300000, guid: 449e74df58ff11045b710f780b414e89, type: 3}
+  destroyedSprite: {fileID: 21300000, guid: c282ed66d6db4fc4b93eb0e9c9dc5a22, type: 3}
 --- !u!1 &307738132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,7 +1794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759080116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.290512, y: 4.5045567, z: 4.3942337}
+  m_LocalPosition: {x: 35.09, y: 4.9, z: 1.88}
   m_LocalScale: {x: 0.30782837, y: 0.2648346, z: 1}
   m_Children: []
   m_Father: {fileID: 1295959435}
