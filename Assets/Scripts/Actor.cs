@@ -19,6 +19,8 @@ public class Actor : MonoBehaviour
     */
     public int team;
 
+    public HealthBar healthBar;
+    public ShieldBar shieldBar;
 
     public float shield = 0f;
 
@@ -47,7 +49,7 @@ public class Actor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        float secondsLeft = Random.Range(0f, 2f);
+        float secondsLeft = Random.Range(0f, 1.8f);
 
         if(enemies.Any(s => col.gameObject.name.Contains(s)))
         {
@@ -61,6 +63,7 @@ public class Actor : MonoBehaviour
         }
     }
 
+    // a function that arbitrarily stops the enemy.
     IEnumerator EnemyWaiter(float s, GameObject target)
     {
         yield return new WaitForSeconds(s);
@@ -71,6 +74,7 @@ public class Actor : MonoBehaviour
         Attack(target);
     }
 
+    // attack of the enemy
     IEnumerator TeamEnemyAttack(GameObject target)
     {
         Actor targetActor = target.GetComponent<Actor>();
@@ -79,17 +83,17 @@ public class Actor : MonoBehaviour
         {
             // attack the target
             if(team == 0)
-                EnemyAttack();
+                StartCoroutine(EnemyAttack(target));
             targetActor.HitShield(hitpoints);
+            targetActor.shieldBar.SetShield(targetActor.shield);
 
             // we weaken the hitpoint since shields make the hitpoints stronger
             // wait until we attack again
             yield return new WaitForSeconds(attackRate);
-            targetActor.GetStats();
         }
-        Debug.Log("Shield destroyed");
         // prevent it from well... bugging lol
         targetActor.shield = 0f;
+        
 
         // since house is pretty much the only thing that can be destroyed
         // in-game for team 1, we use house
@@ -103,18 +107,19 @@ public class Actor : MonoBehaviour
         while(targetActor.health >= 0f && health >= 0)
         {
             if(team == 0)
-                EnemyAttack();
+                StartCoroutine(EnemyAttack(target));
             // attack the target
             // we weaken the hitpoint since shields make the hitpoints stronger
             targetActor.HitHealth(hitpoints);
+            targetActor.healthBar.SetHealth(targetActor.health);
             // wait until we attack again
             yield return new WaitForSeconds(attackRate);
-            targetActor.GetStats();
         }
 
         targetActor.DestroyActor(target);
     }
 
+    // attack
     void Attack(GameObject target)
     {
         if(team == 0)
@@ -123,21 +128,13 @@ public class Actor : MonoBehaviour
         }
     }
 
-    public void GetStats()
-    {
-        Debug.Log("Health: " + health);
-        Debug.Log("Shield: " + shield);
-    }
-
     public void HitShield(float hitpoints)
     {
-        Debug.Log("Shield targeted!");
         shield = shield - (hitpoints - (hitpoints * 0.5f));
     }
 
     public void HitHealth(float hitpoints)
     {
-        Debug.Log("Health targeted!");
         health = health - hitpoints;
 
         // since the house is pretty much the only team that
@@ -148,12 +145,19 @@ public class Actor : MonoBehaviour
     {
         Debug.Log("Actor Destroyed");
         if(actor.GetComponent<Actor>().team == 1)
+        {
             actor.GetComponent<DestroyCity>().CityDestroyed();
+        }
+            
     }
 
-    void EnemyAttack()
+    // attack animation
+    IEnumerator EnemyAttack(GameObject target)
     {
-        transform.position += transform.forward * Time.deltaTime * 1.2f;
-        transform.position -= transform.forward * Time.deltaTime * 1.2f;
+        Vector3 initialPosition = gameObject.transform.position;
+        gameObject.transform.position += transform.up * Time.deltaTime * 30.7f;
+        yield return new WaitForSeconds(attackRate * 0.1f); // 10% of the attack rate
+        // go back
+        gameObject.transform.position = initialPosition;
     }
 }

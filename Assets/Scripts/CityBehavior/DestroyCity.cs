@@ -17,8 +17,6 @@ public class DestroyCity : MonoBehaviour
     // Update is called once per frame
     public void ShieldDestroyed()
     {
-        Debug.Log("Destroying shield");
-        Debug.Log("noShieldSprite: " + noShieldSprite.name);
         spriteRenderer.sprite = noShieldSprite;
     }
 
