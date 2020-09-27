@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: -7627901935534227356
     second: Bacteria_2_11
+  - first:
+      213: -2073058578584435755
+    second: Bacteria_2_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -201,8 +204,8 @@ TextureImporter:
       name: Bacteria_2_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 4096
+        x: 6144
+        y: 6144
         width: 2048
         height: 2048
       alignment: 0
@@ -222,7 +225,7 @@ TextureImporter:
       name: Bacteria_2_4
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 0
         y: 4096
         width: 2048
         height: 2048
@@ -243,7 +246,7 @@ TextureImporter:
       name: Bacteria_2_5
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 2048
         y: 4096
         width: 2048
         height: 2048
@@ -264,8 +267,8 @@ TextureImporter:
       name: Bacteria_2_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2048
+        x: 4096
+        y: 4096
         width: 2048
         height: 2048
       alignment: 0
@@ -285,8 +288,8 @@ TextureImporter:
       name: Bacteria_2_7
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 2048
+        x: 6144
+        y: 4096
         width: 2048
         height: 2048
       alignment: 0
@@ -306,7 +309,7 @@ TextureImporter:
       name: Bacteria_2_8
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 0
         y: 2048
         width: 2048
         height: 2048
@@ -327,8 +330,8 @@ TextureImporter:
       name: Bacteria_2_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 2048
+        y: 2048
         width: 2048
         height: 2048
       alignment: 0
@@ -348,8 +351,8 @@ TextureImporter:
       name: Bacteria_2_10
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 0
+        x: 4096
+        y: 2048
         width: 2048
         height: 2048
       alignment: 0
@@ -369,8 +372,8 @@ TextureImporter:
       name: Bacteria_2_11
       rect:
         serializedVersion: 2
-        x: 4096
-        y: 0
+        x: 6144
+        y: 2048
         width: 2048
         height: 2048
       alignment: 0
@@ -382,6 +385,27 @@ TextureImporter:
       bones: []
       spriteID: 460c7fe9a9f342690800000000000000
       internalID: -7627901935534227356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bacteria_2_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2048
+        height: 2048
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d306e0d4340b33e0800000000000000
+      internalID: -2073058578584435755
       vertices: []
       indices: 
       edges: []

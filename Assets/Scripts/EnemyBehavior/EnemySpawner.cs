@@ -86,6 +86,5 @@ public class EnemySpawner : MonoBehaviour
             newEnemy.GetComponent<Pathfinding.AIPath>().canMove=true;
             ++numEnemy;
         }
-
     }
 }
