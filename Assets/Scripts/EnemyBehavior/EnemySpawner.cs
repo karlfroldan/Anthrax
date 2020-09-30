@@ -32,6 +32,8 @@ public class EnemySpawner : MonoBehaviour
     // the current wave
     private int currWave;
 
+    public GameObject destination;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,12 @@ public class EnemySpawner : MonoBehaviour
             // has no ability to move therefore, we have to set this to true
             // everytime we make a newEnemy object.
             newEnemy.GetComponent<Pathfinding.AIPath>().canMove=true;
+            newEnemy.GetComponent<Pathfinding.AIDestinationSetter>().target = destination.transform; 
+
+            newEnemy.AddComponent<Pathfinding.SimpleSmoothModifier>();
+            // get the component
+            //var simpleSmooth = newEnemy.GetComponent<Pathfinding.SimpleSmoothModifier>();
+
             ++numEnemy;
         }
     }
