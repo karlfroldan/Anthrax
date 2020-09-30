@@ -6,11 +6,11 @@ public class DragDropDoctor : MonoBehaviour{
     public bool isDraggable = true;
     public bool isDragged = false;
 
-    private double pos_x = 11.82;       // will be updated constantly
-    private double pos_y = 3.28;        // will be updated constantly
+    private double pos_x = 13.26;       // will be updated constantly
+    private double pos_y = -2.07;        // will be updated constantly
 
-    private double original_pos_x = 11.82;      // use this to snapback to original x position
-    private double original_pos_y = 3.28;       // use this to snapback to original y position
+    private double original_pos_x = 13.26;      // use this to snapback to original x position
+    private double original_pos_y = -2.07;       // use this to snapback to original y position
 
     private bool check(float x, float y) {
         if ( (this.pos_x <= x+1 && this.pos_x >= x-1) && (this.pos_y <= y+1 && this.pos_y >= y-1) ){
