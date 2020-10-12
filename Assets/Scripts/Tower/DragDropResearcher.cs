@@ -12,6 +12,9 @@ public class DragDropResearcher : MonoBehaviour{
     private double original_pos_x = 13.44;      // use this to snapback to original x position
     private double original_pos_y = 3.66;       // use this to snapback to original y position
 
+        // list of platforms to be used
+    public List<GameObject> platforms;
+
     private bool check(float x, float y) {
         if ( (this.pos_x <= x+1 && this.pos_x >= x-1) && (this.pos_y <= y+1 && this.pos_y >= y-1) ){
             return true;
@@ -20,30 +23,28 @@ public class DragDropResearcher : MonoBehaviour{
         return false;
     }
     void Update(){
+        GameObject currentPlatform = platforms[0];
+        bool isCurrentPlatformAssigned = false;
+
         if (isDragged){
-            if (this.check(GameObject.Find("platform0").transform.position.x, GameObject.Find("platform0").transform.position.y)){
-                transform.position = GameObject.Find("platform0").transform.position;
+            // check if there's a platform that satisfies the condition that it has the same position vector
+            // as our tower.
+            foreach(GameObject platform in platforms)
+            {
+                if(check(platform.transform.position.x, platform.transform.position.y))
+                {
+                    currentPlatform = platform;
+                    isCurrentPlatformAssigned = true;
+                }
             }
-            else if (this.check(GameObject.Find("platform1").transform.position.x, GameObject.Find("platform1").transform.position.y)){
-                transform.position = GameObject.Find("platform1").transform.position;
-            }
-            else if (this.check(GameObject.Find("platform2").transform.position.x, GameObject.Find("platform2").transform.position.y)){
-                transform.position = GameObject.Find("platform2").transform.position;
-            }
-            else if (this.check(GameObject.Find("platform3").transform.position.x, GameObject.Find("platform3").transform.position.y)){
-                transform.position = GameObject.Find("platform3").transform.position;
-            }
-            else if (this.check(GameObject.Find("platform4").transform.position.x, GameObject.Find("platform4").transform.position.y)){
-                transform.position = GameObject.Find("platform4").transform.position;
-            }
-            else if (this.check(GameObject.Find("platform5").transform.position.x, GameObject.Find("platform5").transform.position.y)){
-                transform.position = GameObject.Find("platform5").transform.position;
-            }
-            else if (this.check(GameObject.Find("platform6").transform.position.x, GameObject.Find("platform6").transform.position.y)){
-                transform.position = GameObject.Find("platform6").transform.position;
-            }
-            else {
+            // if there's none, do this shit
+            if(isCurrentPlatformAssigned == false)
+            {
                 transform.position = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            else // if there is, then snap that shit. lol
+            {
+                transform.position = currentPlatform.transform.position;
             }
 
             this.pos_x = transform.position.x;
