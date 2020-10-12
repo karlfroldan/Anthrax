@@ -424,9 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b422bbba1bac6d4f8f931564b413e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  team: 2
   healthBar: {fileID: 280847965}
   shieldBar: {fileID: 1739125406}
+  projectile: {fileID: 0}
   shield: 100
   health: 100
   attackRate: 1
@@ -7029,6 +7030,7 @@ GameObject:
   - component: {fileID: 1116170799}
   - component: {fileID: 1116170802}
   - component: {fileID: 1116170801}
+  - component: {fileID: 1116170803}
   m_Layer: 0
   m_Name: tower_doctor
   m_TagString: Untagged
@@ -7148,6 +7150,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24}
   m_EdgeRadius: 0
+--- !u!114 &1116170803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116170798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c62fb48db9553344a93622bdab1f2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 21300000, guid: de2952d40a8ba104daabee142ae474d2, type: 3}
 --- !u!1 &1295959434
 GameObject:
   m_ObjectHideFlags: 0

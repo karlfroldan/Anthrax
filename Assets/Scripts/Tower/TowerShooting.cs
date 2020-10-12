@@ -26,10 +26,8 @@ public class TowerShooting : MonoBehaviour
         shooterActor.hitpoints = 0.8f; // but low damage since they mostly just write incomprehensible stuff
         isTargetLocked = false;
 
-        if(parentName.Contains("doctor"))
-        {
-            shooterActor.projectile = Resources.Load<Sprite>("Sprites/Projectiles/Projectile_Doctor");
-        }
+        // get the file of the projectile sprite
+        shooterActor.projectile = GameObject.Find(parentName).GetComponent<TowerProjectileSetter>().projectile;
     }
 
     public void SetColliderRadius(float r)
