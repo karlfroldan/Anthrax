@@ -14,6 +14,7 @@ public class Actor : MonoBehaviour
 {
     /*
         Teams include:
+            2- house
             1- player
             0- enemy
     */
@@ -21,6 +22,8 @@ public class Actor : MonoBehaviour
 
     public HealthBar healthBar;
     public ShieldBar shieldBar;
+
+    public Sprite projectile;
 
     public float shield = 0f;
 
@@ -51,16 +54,80 @@ public class Actor : MonoBehaviour
     {
         float secondsLeft = Random.Range(0f, 1.8f);
 
-        if(enemies.Any(s => col.gameObject.name.Contains(s)))
+        if(team == 1)
         {
-            // if the actor is a bacteria or virus or whatsoever
-            // we halt randomly
-            if(team == 0)
+            GameObject enemyObject = col.gameObject;
+            Actor targetActor = col.gameObject.GetComponent<Actor>();
+            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
+
+            if(targetActor.team == 0)
+            {
+                // lock the target of the targetActor
+                if(!towerShooting.isTargetLocked)
+                {
+                    // we are now locked on the single enemy
+                    towerShooting.isTargetLocked = true;   
+                    // then we set the new enemy as the target
+                    towerShooting.currentTarget = enemyObject;
+                    Debug.Log("Target locked at: " + enemyObject.name);
+                }
+                    
+            }
+        }
+        else if(team == 0)   // if it's an enemy team
+        {
+            if(enemies.Any(s => col.gameObject.name.Contains(s)))
             {
                 StartCoroutine(EnemyWaiter(secondsLeft, col.gameObject));
             }
-            
+        }   
+    }
+
+    // when a target gets out of sight
+    void OnTriggerExit2D(Collider2D col)
+    {
+        // this only works for the towers
+        if(team == 1)
+        {
+            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
+            if(towerShooting.isTargetLocked)
+            {
+                towerShooting.isTargetLocked = false;
+                towerShooting.currentTarget = null;
+            }
         }
+    }
+
+    // when there are targets inside the range of the tower
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if(team == 1 && gameObject.GetComponent<TowerShooting>() != null)
+        {
+            // this only works for the towers
+            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
+            // check if it is not locked
+            if(!towerShooting.isTargetLocked)
+            {
+                // if it is not locked, then we switch to this target
+                towerShooting.isTargetLocked = true;
+                towerShooting.currentTarget = col.gameObject;
+                Debug.Log("New target is: " + col.gameObject.name);
+            }
+        }
+    }
+
+    IEnumerator TowerShoot(GameObject target)
+    {
+        TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
+
+        if(towerShooting.currentTarget != null)
+        {
+            Transform targetPos = target.transform;
+
+            yield return new WaitForSeconds(attackRate);
+        }
+        else
+            yield return new WaitForSeconds(0f);
     }
 
     // a function that arbitrarily stops the enemy.
@@ -96,8 +163,8 @@ public class Actor : MonoBehaviour
         
 
         // since house is pretty much the only thing that can be destroyed
-        // in-game for team 1, we use house
-        if(targetActor.team == 1)
+        // in-game for team 2, we use house
+        if(targetActor.team == 2)
         {
             target.GetComponent<DestroyCity>().ShieldDestroyed();
         }
@@ -144,7 +211,7 @@ public class Actor : MonoBehaviour
     public void DestroyActor(GameObject actor)
     {
         Debug.Log("Actor Destroyed");
-        if(actor.GetComponent<Actor>().team == 1)
+        if(actor.GetComponent<Actor>().team == 2)
         {
             actor.GetComponent<DestroyCity>().CityDestroyed();
         }
