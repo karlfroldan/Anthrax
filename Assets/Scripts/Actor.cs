@@ -69,7 +69,7 @@ public class Actor : MonoBehaviour
                     towerShooting.isTargetLocked = true;   
                     // then we set the new enemy as the target
                     towerShooting.currentTarget = enemyObject;
-                    Debug.Log("Target locked at: " + enemyObject.name);
+                    StartCoroutine(TowerShoot(enemyObject));
                 }
                     
             }
@@ -101,7 +101,7 @@ public class Actor : MonoBehaviour
     // when there are targets inside the range of the tower
     void OnTriggerStay2D(Collider2D col)
     {
-        if(team == 1 && gameObject.GetComponent<TowerShooting>() != null)
+        if(team == 1 && gameObject.GetComponent<TowerShooting>() == null)
         {
             // this only works for the towers
             TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
@@ -111,7 +111,6 @@ public class Actor : MonoBehaviour
                 // if it is not locked, then we switch to this target
                 towerShooting.isTargetLocked = true;
                 towerShooting.currentTarget = col.gameObject;
-                Debug.Log("New target is: " + col.gameObject.name);
             }
         }
     }
@@ -119,15 +118,36 @@ public class Actor : MonoBehaviour
     IEnumerator TowerShoot(GameObject target)
     {
         TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
-
-        if(towerShooting.currentTarget != null)
+        Debug.Log("Target is: " + target.name);
+        while(towerShooting.currentTarget != null)
         {
-            Transform targetPos = target.transform;
+            //Debug.Log("Halts target");
+            // we shoot
+            Transform targetT = target.transform;
 
+            // attack
+            //Debug.Log("Target position is: " + targetT.position);
+            //towerShooting.ShootProjectile(targetT);
+            Actor targetActor = target.GetComponent<Actor>();
+            targetActor.HitHealth(hitpoints);
+            // get the health of the enemy
+            float enemyHealth = targetActor.health;
+            Debug.Log("Enemy Health is now " + enemyHealth);
+            if(enemyHealth <= 0f)
+            {  
+                DestroyActor(target);
+                towerShooting.currentTarget = null;
+                towerShooting.isTargetLocked = false;
+                Debug.Log("Killed enemy " + target.name);
+                break;
+            }
+
+            
+            //Debug.Log("currenttarget = " + towerShooting.currentTarget.name);
             yield return new WaitForSeconds(attackRate);
         }
-        else
-            yield return new WaitForSeconds(0f);
+
+        yield return new WaitForSeconds(0f);
     }
 
     // a function that arbitrarily stops the enemy.
@@ -210,7 +230,25 @@ public class Actor : MonoBehaviour
 
     public void DestroyActor(GameObject actor)
     {
-        Debug.Log("Actor Destroyed");
+        //Debug.Log("Actor Destroyed");
+        if(actor.GetComponent<Actor>().team == 0)
+        {
+            Debug.Log("Destroying the enemy");
+            // increment number of destroyed enemies
+            EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+            enemySpawner.enemiesKilled++; 
+            /*Actor enemyActor = actor.GetComponent<Actor>();
+            // set hitpoints to 0
+            enemyActor.hitpoints = 0;
+            // set attack rate to 0
+            enemyActor.attackRate = 0;
+            // set AI to can't move
+            actor.GetComponent<Pathfinding.AIPath>().canMove = false;
+            // hide the sprite
+            GameObject gfx = actor.transform.GetChild(0).gameObject;
+            gfx.GetComponent<Renderer>().enabled=false;*/
+            Destroy(actor);
+        }
         if(actor.GetComponent<Actor>().team == 2)
         {
             actor.GetComponent<DestroyCity>().CityDestroyed();

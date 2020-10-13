@@ -5,7 +5,9 @@ using UnityEngine;
 public class TowerProjectileSetter : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Sprite projectile;
+    public GameObject bulletPrefab;
+    public float attackRate;
+    public float hitpoints;
 
     void Start()
     {
