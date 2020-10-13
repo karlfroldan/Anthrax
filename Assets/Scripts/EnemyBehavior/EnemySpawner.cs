@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     private List<Vector3> enpositions = new List<Vector3>();
 
     private int numEnemy = 0;
+    public int enemiesKilled = 0;
 
     // the current wave
     private int currWave;
