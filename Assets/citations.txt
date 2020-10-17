@@ -1,3 +1,9 @@
 Start Menu Background Image:  http://www.hdwallpaperspulse.com/free-background-2.html
 
 Level2 Tileset: https://opengameart.org/content/basic-map-32x32-by-ivan-voirol
+
+Winter Tileset: https://opengameart.org/content/lpc-winter-tiles
+
+City Tileset: https://opengameart.org/content/lpc-city-outside
+
+Rodent Animated Sprites/Tiles: https://opengameart.org/content/beaver
