@@ -30,6 +30,9 @@ public class DragDropDoctor : MonoBehaviour{
         if (isDragged){
             // check if there's a platform that satisfies the condition that it has the same position vector
             // as our tower.
+
+            transform.position = currentPlatform.transform.position;
+            
             foreach(GameObject platform in platforms)
             {
                 if(check(platform.transform.position.x, platform.transform.position.y))
@@ -46,6 +49,8 @@ public class DragDropDoctor : MonoBehaviour{
             else // if there is, then snap that shit. lol
             {
                 transform.position = currentPlatform.transform.position;
+                //transform.position.x = original_pos_x;
+                //transform.position.y = original_pos_y;
 
                 if(!isSnappedToPlatform)
                 {
