@@ -1,22 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D m_RigidBody;
+    private Vector3 shootDir;
     void Start()
     {
-
         m_RigidBody = gameObject.GetComponent<Rigidbody2D>();
-        Debug.Log("is m_RigidBody simulated" + m_RigidBody.simulated);
     }
 
-    // Update is called once per frame
-    public void Init(Vector3 direction)
+    public void Setup(Vector3 shootDir)
     {
-        Debug.Log("We are now shooting");
-        m_RigidBody.AddForce(direction);
+        this.shootDir = shootDir;
+        transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(shootDir));
+    }
+
+    void Update()
+    {
+        float moveSpeed = 29.432f;
+        transform.position += shootDir * moveSpeed * Time.deltaTime;
     }
 }

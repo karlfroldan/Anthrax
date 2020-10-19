@@ -11,15 +11,11 @@ public class TowerShooting : MonoBehaviour
 
     private Actor shooterActor;
     private CircleCollider2D collider;
-    private float timeToReachTarget;
-    private float t;
     private Vector3 startPosition;
-    private Vector3 endPosition;
 
     public GameObject currentTarget;
 
-    // prevent the tower from changing targets while the target is locked
-    public bool isTargetLocked;
+    public bool isShooting = false;
 
     void Start()
     {
@@ -27,8 +23,6 @@ public class TowerShooting : MonoBehaviour
         gameObject.AddComponent<Actor>();
         shooterActor = gameObject.GetComponent<Actor>();
         shooterActor.team = 1; // team 1 means player
-
-        isTargetLocked = false;
 
         // Set projectile properties
         TowerProjectileSetter tpSetter = parent.GetComponent<TowerProjectileSetter>();
@@ -54,17 +48,15 @@ public class TowerShooting : MonoBehaviour
         gameObject.transform.position = pos;
     }
 
-    void Update()
+    public void ShootProjectile()
     {
-        t += Time.deltaTime / timeToReachTarget;
-        transform.position = Vector3.Lerp(startPosition, endPosition, t);
-    }
+        GameObject bulletObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-    public void ShootProjectile(Transform endTransform)
-    {
-        // shoot a projectile at the location
-        Debug.Log("Shooting projectiles at: " + endTransform.position);
-        //GameObject tempBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        //tempBullet.GetComponent<Bullet>().Init(Vector3.up);
+        Transform targetTransform = currentTarget.transform;
+
+        // shootDir is the direction of the enemy
+        Vector3 shootDir = (targetTransform.position - bulletObject.transform.position).normalized;
+
+        bulletObject.GetComponent<Bullet>().Setup(shootDir);
     }
 }

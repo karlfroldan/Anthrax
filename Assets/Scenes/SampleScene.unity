@@ -220,7 +220,7 @@ RectTransform:
   - {fileID: 280847963}
   - {fileID: 1739125404}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2268,7 +2268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &607489913
 PrefabInstance:
@@ -7752,7 +7752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5021458674840193840, guid: 46f5d5953b8f61946bcb7362e83028eb,
     type: 3}
-  attackRate: 0.4
+  attackRate: 1.7
   hitpoints: 16.78
 --- !u!1 &1179061914
 GameObject:
@@ -10974,7 +10974,7 @@ PrefabInstance:
     - target: {fileID: 4788744884026697321, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4788744884026697321, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}

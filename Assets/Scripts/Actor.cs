@@ -48,6 +48,31 @@ public class Actor : MonoBehaviour
         //InvokeRepeating("UpdateEnemies", 0.2f, 0.2f);
     }
 
+    void Update()
+    {
+        // use this for tower
+        if(team == 1)
+        {
+            TowerShooting towerShooting = GetComponent<TowerShooting>();
+            if(towerShooting.currentTarget != null && towerShooting.isShooting == false)
+            {
+                // if there is a target, we shoot
+                // we start shooting. The Coroutine says will enable this to false again
+                towerShooting.isShooting = true;
+                // we finally shoot the projectile
+                towerShooting.ShootProjectile();
+
+                StartCoroutine(WaitUntilShoot());
+            }
+        }
+    }
+
+    IEnumerator WaitUntilShoot()
+    {
+        yield return new WaitForSeconds(attackRate);
+        GetComponent<TowerShooting>().isShooting = false;
+    }
+
     // Update is called once per frame
 
     void OnTriggerEnter2D(Collider2D col)
@@ -56,22 +81,16 @@ public class Actor : MonoBehaviour
 
         if(team == 1)
         {
-            GameObject enemyObject = col.gameObject;
-            Actor targetActor = col.gameObject.GetComponent<Actor>();
-            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
-
-            if(targetActor.team == 0)
+            // if the current actor is a tower
+            TowerShooting towerShooting = GetComponent<TowerShooting>();
+            
+            // If there is no current target, then we set this one as the target
+            if(towerShooting.currentTarget == null)
             {
-                // lock the target of the targetActor
-                if(!towerShooting.isTargetLocked)
-                {
-                    // we are now locked on the single enemy
-                    towerShooting.isTargetLocked = true;   
-                    // then we set the new enemy as the target
-                    towerShooting.currentTarget = enemyObject;
-                    StartCoroutine(TowerShoot(enemyObject));
-                }
-                    
+                // and get the target Actor
+                towerShooting.currentTarget = col.gameObject;
+                // make sure that we aren't shooting right now
+                towerShooting.isShooting = false;
             }
         }
         else if(team == 0)   // if it's an enemy team
@@ -89,11 +108,13 @@ public class Actor : MonoBehaviour
         // this only works for the towers
         if(team == 1)
         {
-            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
-            if(towerShooting.isTargetLocked)
+            TowerShooting towerShooting = GetComponent<TowerShooting>();
+
+            if(towerShooting.currentTarget == col.gameObject)
             {
-                towerShooting.isTargetLocked = false;
+                Debug.Log("No more target.");
                 towerShooting.currentTarget = null;
+                towerShooting.isShooting = false;
             }
         }
     }
@@ -101,53 +122,19 @@ public class Actor : MonoBehaviour
     // when there are targets inside the range of the tower
     void OnTriggerStay2D(Collider2D col)
     {
-        if(team == 1 && gameObject.GetComponent<TowerShooting>() == null)
+        if(team == 1)
         {
-            // this only works for the towers
-            TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
-            // check if it is not locked
-            if(!towerShooting.isTargetLocked)
+            TowerShooting towerShooting = GetComponent<TowerShooting>();
+            // check if we currently have a target
+            if(towerShooting.currentTarget == null)
             {
-                // if it is not locked, then we switch to this target
-                towerShooting.isTargetLocked = true;
+                // then we find a target.
                 towerShooting.currentTarget = col.gameObject;
+                // make sure we aren't shooting for now.
+                towerShooting.isShooting = false;
+                Debug.Log("Set target to " + col.gameObject.name);
             }
         }
-    }
-
-    IEnumerator TowerShoot(GameObject target)
-    {
-        TowerShooting towerShooting = gameObject.GetComponent<TowerShooting>();
-        Debug.Log("Target is: " + target.name);
-        while(towerShooting.currentTarget != null)
-        {
-            //Debug.Log("Halts target");
-            // we shoot
-            Transform targetT = target.transform;
-
-            // attack
-            //Debug.Log("Target position is: " + targetT.position);
-            //towerShooting.ShootProjectile(targetT);
-            Actor targetActor = target.GetComponent<Actor>();
-            targetActor.HitHealth(hitpoints);
-            // get the health of the enemy
-            float enemyHealth = targetActor.health;
-            Debug.Log("Enemy Health is now " + enemyHealth);
-            if(enemyHealth <= 0f)
-            {  
-                DestroyActor(target);
-                towerShooting.currentTarget = null;
-                towerShooting.isTargetLocked = false;
-                Debug.Log("Killed enemy " + target.name);
-                break;
-            }
-
-            
-            //Debug.Log("currenttarget = " + towerShooting.currentTarget.name);
-            yield return new WaitForSeconds(attackRate);
-        }
-
-        yield return new WaitForSeconds(0f);
     }
 
     // a function that arbitrarily stops the enemy.
