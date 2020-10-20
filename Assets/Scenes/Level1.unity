@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &8823035 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 788212080}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9423940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,12 +1648,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &428823063 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 308682546}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &432887584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,12 +2468,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720687513}
   m_CullTransparentMesh: 0
---- !u!1 &744759970 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1743255116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &788212080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7514,12 +7496,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972156894}
   m_CullTransparentMesh: 0
---- !u!1 &1004287185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1425885432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1043622851
 GameObject:
   m_ObjectHideFlags: 0
@@ -7594,12 +7570,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043622851}
   m_CullTransparentMesh: 0
---- !u!1 &1091395334 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4914815619362568131}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1091395336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
@@ -7617,8 +7587,8 @@ GameObject:
   - component: {fileID: 1116170800}
   - component: {fileID: 1116170799}
   - component: {fileID: 1116170802}
-  - component: {fileID: 1116170801}
   - component: {fileID: 1116170803}
+  - component: {fileID: 1116170801}
   m_Layer: 0
   m_Name: tower_doctor
   m_TagString: Untagged
@@ -7699,19 +7669,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116170798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff209c5ba7a062b4fa2f2ed152bdb66a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc59d5a10ea0e24d8a351190e44114d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDraggable: 1
   isDragged: 0
-  platforms:
-  - {fileID: 1091395334}
-  - {fileID: 428823063}
-  - {fileID: 1988992724}
-  - {fileID: 8823035}
-  - {fileID: 1004287185}
-  - {fileID: 744759970}
-  - {fileID: 1688758454}
+  colliderRadius: 6.42
+  platforms: {fileID: 1295959434}
 --- !u!61 &1116170802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7753,7 +7717,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5021458674840193840, guid: 46f5d5953b8f61946bcb7362e83028eb,
     type: 3}
   attackRate: 1.7
-  hitpoints: 16.78
+  hitpoints: 24.76
 --- !u!1 &1179061914
 GameObject:
   m_ObjectHideFlags: 0
@@ -8591,6 +8555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1683530732}
   - component: {fileID: 1683530731}
+  - component: {fileID: 1683530733}
   - component: {fileID: 1683530730}
   - component: {fileID: 1683530729}
   m_Layer: 0
@@ -8609,19 +8574,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1683530728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eae195d0a6a32a4fa10cc5bdefc0161, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc59d5a10ea0e24d8a351190e44114d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDraggable: 1
   isDragged: 0
-  platforms:
-  - {fileID: 1091395334}
-  - {fileID: 428823063}
-  - {fileID: 1988992724}
-  - {fileID: 8823035}
-  - {fileID: 1004287185}
-  - {fileID: 744759970}
-  - {fileID: 1688758454}
+  colliderRadius: 7.98
+  platforms: {fileID: 1295959434}
 --- !u!61 &1683530730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8712,12 +8671,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1688758454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1454165864}
+--- !u!114 &1683530733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683530728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c62fb48db9553344a93622bdab1f2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5021458674840193840, guid: 46f5d5953b8f61946bcb7362e83028eb,
+    type: 3}
+  attackRate: 0.2
+  hitpoints: 7.2
 --- !u!1 &1713981430
 GameObject:
   m_ObjectHideFlags: 0
@@ -10574,12 +10543,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940582133}
   m_CullTransparentMesh: 0
---- !u!1 &1988992724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4914815620453296325, guid: d59d23941c414cc459794210cc30826c,
-    type: 3}
-  m_PrefabInstance: {fileID: 607489913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1989614140
 GameObject:
   m_ObjectHideFlags: 0
@@ -10590,6 +10553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989614142}
   - component: {fileID: 1989614141}
+  - component: {fileID: 1989614145}
   - component: {fileID: 1989614144}
   - component: {fileID: 1989614143}
   m_Layer: 0
@@ -10672,24 +10636,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989614140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3777a967552cfe24383781f1a5224c41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc59d5a10ea0e24d8a351190e44114d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDraggable: 1
   isDragged: 0
-  pos_x: 13.27
-  pos_y: 0.87
-  isSnappedToPlatform: 0
-  isSticked: 0
-  isReleased: 0
-  platforms:
-  - {fileID: 1091395334}
-  - {fileID: 428823063}
-  - {fileID: 1988992724}
-  - {fileID: 8823035}
-  - {fileID: 1004287185}
-  - {fileID: 744759970}
-  - {fileID: 1688758454}
+  colliderRadius: 6.42
+  platforms: {fileID: 1295959434}
 --- !u!61 &1989614144
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10702,7 +10655,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -10716,6 +10669,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24}
   m_EdgeRadius: 0
+--- !u!114 &1989614145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989614140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c62fb48db9553344a93622bdab1f2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5021458674840193840, guid: 46f5d5953b8f61946bcb7362e83028eb,
+    type: 3}
+  attackRate: 1.2
+  hitpoints: 20.43
 --- !u!1 &2079762584
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,6 +62,9 @@ public class Actor : MonoBehaviour
                 // we finally shoot the projectile
                 towerShooting.ShootProjectile();
 
+                if(towerShooting.currentTarget.GetComponent<Actor>().health <= 0)
+                    DestroyActor(towerShooting.currentTarget);
+
                 StartCoroutine(WaitUntilShoot());
             }
         }
@@ -85,12 +88,10 @@ public class Actor : MonoBehaviour
             TowerShooting towerShooting = GetComponent<TowerShooting>();
             
             // If there is no current target, then we set this one as the target
-            if(towerShooting.currentTarget == null)
+            if(towerShooting.currentTarget == null && !towerShooting.isShooting)
             {
                 // and get the target Actor
                 towerShooting.currentTarget = col.gameObject;
-                // make sure that we aren't shooting right now
-                towerShooting.isShooting = false;
             }
         }
         else if(team == 0)   // if it's an enemy team
@@ -114,7 +115,6 @@ public class Actor : MonoBehaviour
             {
                 Debug.Log("No more target.");
                 towerShooting.currentTarget = null;
-                towerShooting.isShooting = false;
             }
         }
     }
@@ -126,13 +126,10 @@ public class Actor : MonoBehaviour
         {
             TowerShooting towerShooting = GetComponent<TowerShooting>();
             // check if we currently have a target
-            if(towerShooting.currentTarget == null)
+            if(towerShooting.currentTarget == null && !towerShooting.isShooting)
             {
                 // then we find a target.
                 towerShooting.currentTarget = col.gameObject;
-                // make sure we aren't shooting for now.
-                towerShooting.isShooting = false;
-                Debug.Log("Set target to " + col.gameObject.name);
             }
         }
     }
@@ -171,7 +168,7 @@ public class Actor : MonoBehaviour
 
         // since house is pretty much the only thing that can be destroyed
         // in-game for team 2, we use house
-        if(targetActor.team == 2)
+        if(targetActor.team == 2 && targetActor.shield <= 0)
         {
             target.GetComponent<DestroyCity>().ShieldDestroyed();
         }
@@ -215,30 +212,32 @@ public class Actor : MonoBehaviour
         // can be destroyed, we use house
     }
 
-    public void DestroyActor(GameObject actor)
+    public void DestroyActor(GameObject target)
     {
         //Debug.Log("Actor Destroyed");
-        if(actor.GetComponent<Actor>().team == 0)
+        if(target.GetComponent<Actor>().team == 0)
         {
             Debug.Log("Destroying the enemy");
             // increment number of destroyed enemies
             EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
             enemySpawner.enemiesKilled++; 
-            /*Actor enemyActor = actor.GetComponent<Actor>();
+            Actor enemyActor = target.GetComponent<Actor>();
             // set hitpoints to 0
             enemyActor.hitpoints = 0;
             // set attack rate to 0
             enemyActor.attackRate = 0;
             // set AI to can't move
-            actor.GetComponent<Pathfinding.AIPath>().canMove = false;
+            target.GetComponent<Pathfinding.AIPath>().canMove = false;
             // hide the sprite
-            GameObject gfx = actor.transform.GetChild(0).gameObject;
-            gfx.GetComponent<Renderer>().enabled=false;*/
-            Destroy(actor);
+            GameObject gfx = target.transform.GetChild(0).gameObject;
+            gfx.GetComponent<Renderer>().enabled=false;
+            // set tcurrent target to null
+            GetComponent<TowerShooting>().currentTarget = null;
+            Destroy(target);
         }
-        if(actor.GetComponent<Actor>().team == 2)
+        if(target.GetComponent<Actor>().team == 2)
         {
-            actor.GetComponent<DestroyCity>().CityDestroyed();
+            target.GetComponent<DestroyCity>().CityDestroyed();
         }
             
     }
