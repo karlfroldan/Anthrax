@@ -9,10 +9,12 @@ public class DragDropDoctor : MonoBehaviour{
     private double pos_x = 13.26;       // will be updated constantly
     private double pos_y = -2.07;        // will be updated constantly
 
-    private double original_pos_x = 13.26;      // use this to snapback to original x position
-    private double original_pos_y = -2.07;       // use this to snapback to original y position
+    private const double original_pos_x = 13.26;      // use this to snapback to original x position
+    private const double original_pos_y = -2.07;       // use this to snapback to original y position
 
     private bool isSnappedToPlatform = false;
+    private bool isSticked = false;
+    private bool isReleased;
     // list of platforms to be used
     public List<GameObject> platforms;
 
@@ -30,28 +32,22 @@ public class DragDropDoctor : MonoBehaviour{
         if (isDragged){
             // check if there's a platform that satisfies the condition that it has the same position vector
             // as our tower.
+            transform.position = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            transform.position = currentPlatform.transform.position;
-            
             foreach(GameObject platform in platforms)
             {
                 if(check(platform.transform.position.x, platform.transform.position.y))
                 {
+                    transform.position = platform.transform.position;
+                    this.isSticked = true;
+                    this.isDraggable = false;
                     currentPlatform = platform;
                     isCurrentPlatformAssigned = true;
                 }
             }
-            // if there's none, do this shit
-            if(isCurrentPlatformAssigned == false)
-            {
-                transform.position = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            }
-            else // if there is, then snap that shit. lol
-            {
-                transform.position = currentPlatform.transform.position;
-                //transform.position.x = original_pos_x;
-                //transform.position.y = original_pos_y;
 
+            if(!isCurrentPlatformAssigned)
+            {
                 if(!isSnappedToPlatform)
                 {
                     isSnappedToPlatform = true;
@@ -67,9 +63,15 @@ public class DragDropDoctor : MonoBehaviour{
                 
             }
 
-            this.pos_x = transform.position.x;
-            this.pos_y = transform.position.y; 
         }
+        else {
+            if(!this.isSticked) {
+                transform.position = new Vector2((float)original_pos_x, (float)original_pos_y);
+            }
+                
+        }
+        this.pos_x = transform.position.x;
+        this.pos_y = transform.position.y; 
     }
     private void OnMouseOver(){
         if (isDraggable && Input.GetMouseButtonDown(0)) {
@@ -79,4 +81,5 @@ public class DragDropDoctor : MonoBehaviour{
     private void OnMouseUp(){
         isDragged = false;
     }
+
 }
