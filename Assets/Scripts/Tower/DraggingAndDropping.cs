@@ -5,6 +5,7 @@ using System.Linq;
 
 public class DraggingAndDropping : MonoBehaviour{
     public bool isDraggable = true;
+    public int price;
     public bool isDragged = false;
     public float colliderRadius;
 
@@ -92,6 +93,9 @@ public class DraggingAndDropping : MonoBehaviour{
             // then make it snapped
             // to prevent making the object above repeatedly :P 
             isSnapped = true;
+
+            // then create another instance of this object
+            CreateAnother();
         }
         
         // END OF YOUR CODE
@@ -104,6 +108,17 @@ public class DraggingAndDropping : MonoBehaviour{
     }
     private void OnMouseUp(){
         isDragged = false;
+    }
+
+    private void CreateAnother()
+    {
+        Vector3 newPosition = new Vector3((float)original_pos_x, (float)original_pos_y, 0f);
+        GameObject newTower = (GameObject)Instantiate(gameObject, newPosition, transform.rotation);
+        // then set some values
+        DraggingAndDropping newDragDrop = newTower.GetComponent<DraggingAndDropping>();
+        newDragDrop.isDraggable = true;
+        newDragDrop.isDragged = false;
+        newDragDrop.isSnapped = false;
     }
 
 }
