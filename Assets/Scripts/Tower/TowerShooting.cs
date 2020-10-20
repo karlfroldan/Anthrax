@@ -39,8 +39,6 @@ public class TowerShooting : MonoBehaviour
         collider = gameObject.GetComponent<CircleCollider2D>();
         collider.radius = r;
         collider.isTrigger = true;
-
-        Debug.Log("Parent Name is: " + parentName);
     }
 
     public void SetPosition(Vector3 pos)
@@ -57,6 +55,22 @@ public class TowerShooting : MonoBehaviour
         // shootDir is the direction of the enemy
         Vector3 shootDir = (targetTransform.position - bulletObject.transform.position).normalized;
 
-        bulletObject.GetComponent<Bullet>().Setup(shootDir);
+        Vector3 targetPos = new Vector3(); // we use this for deep copy. Otherwise, it will be a shallow copy
+        targetPos.x = currentTarget.transform.position.x;
+        targetPos.y = currentTarget.transform.position.y;
+        targetPos.z = currentTarget.transform.position.z;
+        bulletObject.GetComponent<Bullet>().Setup(shootDir, targetPos, this);
+    }
+
+    public void DamageTarget()
+    {
+        
+        Actor towerActor = gameObject.GetComponent<Actor>();
+        if(currentTarget != null)
+        {
+            Actor targetActor = currentTarget.GetComponent<Actor>();
+            targetActor.health = targetActor.health - towerActor.hitpoints;
+        }
+            
     }
 }

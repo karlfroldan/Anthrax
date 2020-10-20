@@ -8,9 +8,4 @@ public class TowerProjectileSetter : MonoBehaviour
     public GameObject bulletPrefab;
     public float attackRate;
     public float hitpoints;
-
-    void Start()
-    {
-        
-    }
 }
