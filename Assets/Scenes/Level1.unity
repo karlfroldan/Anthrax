@@ -221,6 +221,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &130095721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
+    type: 3}
+  m_PrefabInstance: {fileID: 4788744884942875433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &196075310
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &196075311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -377,8 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b382dc62cf7edf041bde2efa046ea647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
-  PauseMenuUI: {fileID: 780307458}
 --- !u!1 &280847962
 GameObject:
   m_ObjectHideFlags: 0
@@ -8204,7 +8208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1375293182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8300,8 +8304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb83aad3a3b2744eabbf26b76fdc88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryMenu: {fileID: 0}
-  defeatMenu: {fileID: 0}
+  enemy_spawner: {fileID: 130095721}
+  house: {fileID: 265540135}
+  victoryMenu: {fileID: 1922793856}
+  defeatMenu: {fileID: 196075310}
 --- !u!1 &1418821410
 GameObject:
   m_ObjectHideFlags: 0
@@ -10422,7 +10428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1922793857
 RectTransform:
   m_ObjectHideFlags: 0
