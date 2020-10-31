@@ -277,7 +277,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 165840820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685894105}
+        m_MethodName: replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &165840820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4488,6 +4499,7 @@ GameObject:
   - component: {fileID: 685894103}
   - component: {fileID: 685894102}
   - component: {fileID: 685894101}
+  - component: {fileID: 685894105}
   m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
@@ -4578,6 +4590,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &685894105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685894100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb83aad3a3b2744eabbf26b76fdc88c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_spawner: {fileID: 1570328487}
+  house: {fileID: 1860924071}
+  victoryMenu: {fileID: 2090267482}
+  defeatMenu: {fileID: 1355447362}
+  background: {fileID: 1214700655}
 --- !u!1001 &699880710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4879,7 +4908,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1005721733}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685894105}
+        m_MethodName: defeat_main_menu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1005721733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6335,6 +6375,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e411dfa5d32e54c9902543f94ab993, type: 3}
+--- !u!1 &1570328487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
+    type: 3}
+  m_PrefabInstance: {fileID: 1570328486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1649535498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6541,7 +6587,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1856794912}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685894105}
+        m_MethodName: replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1856794912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6836,7 +6893,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685894100}
+      - m_Target: {fileID: 1829979556}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1214700655}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -7229,7 +7297,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2036362531}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685894105}
+        m_MethodName: victory_next_scene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2036362531
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6408,6 +6408,7 @@ GameObject:
   - component: {fileID: 859213176}
   - component: {fileID: 859213175}
   - component: {fileID: 859213174}
+  - component: {fileID: 859213178}
   m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
@@ -6498,6 +6499,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &859213178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859213173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb83aad3a3b2744eabbf26b76fdc88c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_spawner: {fileID: 1855614333}
+  house: {fileID: 2145318982}
+  victoryMenu: {fileID: 1533509047}
+  defeatMenu: {fileID: 1512545397}
+  background: {fileID: 403881381}
 --- !u!1 &863594788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6918,7 +6936,7 @@ PrefabInstance:
     - target: {fileID: 9014988746424077077, guid: 9af26e6d79acf804fbe627b269d57757,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af26e6d79acf804fbe627b269d57757, type: 3}
@@ -7216,7 +7234,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1201579439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859213178}
+        m_MethodName: defeat_main_menu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1201579439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7335,7 +7364,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1225721604}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859213178}
+        m_MethodName: replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1225721604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7407,7 +7447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -522, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1264279888
@@ -8138,7 +8178,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1558795449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859213178}
+        m_MethodName: victory_next_scene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1558795449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8338,7 +8389,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 859213173}
+      - m_Target: {fileID: 775181772}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 403881381}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -8554,6 +8616,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e411dfa5d32e54c9902543f94ab993, type: 3}
+--- !u!1 &1855614333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
+    type: 3}
+  m_PrefabInstance: {fileID: 1855614332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1864301914
 GameObject:
   m_ObjectHideFlags: 0
@@ -8684,7 +8752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 327.8, y: -81.90021}
+  m_AnchoredPosition: {x: -207, y: -81.90021}
   m_SizeDelta: {x: 222.05005, y: 68.55931}
   m_Pivot: {x: 0.76881075, y: 1.5391417}
 --- !u!114 &1916314458
@@ -8729,7 +8797,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1916314459}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859213178}
+        m_MethodName: replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1916314459
 MonoBehaviour:
   m_ObjectHideFlags: 0

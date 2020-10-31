@@ -7,28 +7,42 @@ public class Decider : MonoBehaviour{
     
     public GameObject enemy_spawner;        // Drag EnemySpawner here???
     public GameObject house;        // Drag house GameObj here
-    private float hp;       // Get house.hp property ???
-    private int sum;        // add elements of EnemySpawner.waves[]
-    private  int enemies_killed;        // get EnemySpawner.enemiesKilled property ???
+    //private float hp;       // Get house.hp property ???
+    //private int sum = 0;        // add elements of EnemySpawner.waves[]
+    //private  int enemies_killed;        // get EnemySpawner.enemiesKilled property ???
 
 
     public GameObject victoryMenu;      
-    public GameObject defeatMenu;       
+    public GameObject defeatMenu;
+    public GameObject background;       
 
     void Start(){
 
     }
 
     void Update(){
+        Actor houseActor = house.GetComponent<Actor>();
+        float houseHp = houseActor.health;
 
-        if (this.hp <= 0){
+        EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        int sum = 0;
+
+        foreach (var i in enemySpawner.waves){
+            sum += i;
+        }
+
+        // Debug.Log("SUM IS"+ sum);
+        // Debug.Log("HP IS"+ houseHp);
+        if (houseHp <= 0){
             // set active stage defeat menu
+            background.SetActive(true);
             defeatMenu.SetActive(true);
         }
 
         // Max enemy spawn (calculate this) and number of killed enemies (calculate this? idk lol)
-        if (this.sum - this.enemies_killed <= 0) {
+        if (sum == enemySpawner.enemiesKilled) {
              // set active stage victory menu
+            background.SetActive(true);
             victoryMenu.SetActive(true);
         }
         
