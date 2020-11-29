@@ -221,6 +221,7 @@ public class Actor : MonoBehaviour
             // increment number of destroyed enemies
             EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
             enemySpawner.enemiesKilled++; 
+            Debug.Log("enemiesKilled: " + enemySpawner.enemiesKilled);
             Actor enemyActor = target.GetComponent<Actor>();
             // set hitpoints to 0
             enemyActor.hitpoints = 0;

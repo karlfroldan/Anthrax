@@ -14,23 +14,22 @@ public class Decider : MonoBehaviour{
 
     public GameObject victoryMenu;      
     public GameObject defeatMenu;
-    public GameObject background;       
+    public GameObject background;    
+
+    Actor houseActor;
+    EnemySpawner enemySpawner;   
 
     void Start(){
-
+        houseActor = house.GetComponent<Actor>();
+        enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
     }
 
     void Update(){
-        Actor houseActor = house.GetComponent<Actor>();
         float houseHp = houseActor.health;
-
-        EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         int sum = 0;
-
         foreach (var i in enemySpawner.waves){
             sum += i;
         }
-
         // Debug.Log("SUM IS"+ sum);
         // Debug.Log("HP IS"+ houseHp);
         if (houseHp <= 0){
@@ -38,7 +37,6 @@ public class Decider : MonoBehaviour{
             background.SetActive(true);
             defeatMenu.SetActive(true);
         }
-
         // Max enemy spawn (calculate this) and number of killed enemies (calculate this? idk lol)
         if (sum == enemySpawner.enemiesKilled) {
              // set active stage victory menu
