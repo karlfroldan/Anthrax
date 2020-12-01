@@ -111,7 +111,7 @@ public class EnemySpawner : MonoBehaviour
             WaveUI.GetComponent<TMPro.TextMeshProUGUI>().text = "Wave " + currWave;
             WaveUI.SetActive(true);
 
-            yield return new WaitForSeconds(13);
+            yield return new WaitForSeconds(07.5f);
             WaveUI.SetActive(false);
         }
         //After we have waited 5 seconds print the time again.

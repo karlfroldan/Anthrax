@@ -14,6 +14,7 @@ public class Actor : MonoBehaviour
 {
     /*
         Teams include:
+            3- boss
             2- house
             1- player
             0- enemy
@@ -42,20 +43,46 @@ public class Actor : MonoBehaviour
     // we type this out. The actor will target every objects with an instance name
     // of this one.
     public string instanceName;
+
+    private bool canAttack;
+    private GameObject currentTarget;
     // Start is called before the first frame update
-    void Start()
-    {
-        //InvokeRepeating("UpdateEnemies", 0.2f, 0.2f);
+    void Start() {
+        if (team == 0) {
+            canAttack = false;
+        } else if (team == 1) {
+            canAttack = true;
+        }
     }
 
-    void Update()
-    {
-        // use this for tower
-        if(team == 1)
-        {
+    void Update() {
+        if (team == 0) {
+            // if the enemy can attack
+            if (canAttack) {
+                Actor targetActor = currentTarget.GetComponent<Actor>();
+
+                if (targetActor.shield > 0f && health > 0) {
+                    canAttack = false;
+                    StartCoroutine(EnemyAttack(currentTarget));
+                    // Hit the shield of the house first
+                    targetActor.HitShield(hitpoints);
+                    targetActor.shieldBar.SetShield(targetActor.shield);
+                    // then wait before we can attack again   
+                    StartCoroutine(WaitUntilAttack());
+                }
+
+                // as long as the health of our actor is still above 0, it is still capable of destroying
+                if (targetActor.shield <= 0 && targetActor.health > 0 && health > 0) {
+                    canAttack = false;
+                    StartCoroutine(EnemyAttack(currentTarget));
+                    targetActor.HitHealth(hitpoints);
+                    targetActor.healthBar.SetHealth(targetActor.health);
+                    StartCoroutine(WaitUntilAttack());
+                }
+            }
+        } else if(team == 1) {
             TowerShooting towerShooting = GetComponent<TowerShooting>();
-            if(towerShooting.currentTarget != null && towerShooting.isShooting == false)
-            {
+            if(towerShooting.currentTarget != null && !towerShooting.isShooting && canAttack) {
                 // if there is a target, we shoot
                 // we start shooting. The Coroutine says will enable this to false again
                 towerShooting.isShooting = true;
@@ -66,38 +93,44 @@ public class Actor : MonoBehaviour
                     DestroyActor(towerShooting.currentTarget);
 
                 StartCoroutine(WaitUntilShoot());
+            } //house behaviour every frame
+        } else if (team == 2) {
+            // if there is no more shield but there is still health
+            if (shield <= 0 && health > 0) {
+                shield = 0f;
+                GetComponent<DestroyCity>().ShieldDestroyed();
+            }
+
+            if (shield <= 0f && health <= 0f) {
+                // destroy house
+                shield = 0f;
+                health = 0f;
+                GetComponent<DestroyCity>().CityDestroyed();
             }
         }
     }
 
-    IEnumerator WaitUntilShoot()
-    {
+    IEnumerator WaitUntilShoot() {
         yield return new WaitForSeconds(attackRate);
         GetComponent<TowerShooting>().isShooting = false;
     }
 
     // Update is called once per frame
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
+    void OnTriggerEnter2D(Collider2D col) {
         float secondsLeft = Random.Range(0f, 1.8f);
 
-        if(team == 1)
-        {
+        if(team == 1) {
             // if the current actor is a tower
             TowerShooting towerShooting = GetComponent<TowerShooting>();
             
             // If there is no current target, then we set this one as the target
-            if(towerShooting.currentTarget == null && !towerShooting.isShooting)
-            {
+            if(towerShooting.currentTarget == null && !towerShooting.isShooting) {
                 // and get the target Actor
                 towerShooting.currentTarget = col.gameObject;
             }
-        }
-        else if(team == 0)   // if it's an enemy team
-        {
-            if(enemies.Any(s => col.gameObject.name.Contains(s)))
-            {
+        } else if (team == 0) {
+            if(enemies.Any(s => col.gameObject.name.Contains(s))) {
                 StartCoroutine(EnemyWaiter(secondsLeft, col.gameObject));
             }
         }   
@@ -142,81 +175,23 @@ public class Actor : MonoBehaviour
         // this will only affect enemies
         gameObject.GetComponent<Pathfinding.AIPath>().canMove = false;
 
-        Attack(target);
+        canAttack = true;
+        // set the target
+        currentTarget = target;
     }
 
-    // attack of the enemy
-    IEnumerator TeamEnemyAttack(GameObject target)
-    {
-        Actor targetActor = target.GetComponent<Actor>();
 
-        while(targetActor.shield >= 0f && health >= 0)
-        {
-            // attack the target
-            if(team == 0)
-                StartCoroutine(EnemyAttack(target));
-            targetActor.HitShield(hitpoints);
-            targetActor.shieldBar.SetShield(targetActor.shield);
-
-            // we weaken the hitpoint since shields make the hitpoints stronger
-            // wait until we attack again
-            yield return new WaitForSeconds(attackRate);
-        }
-        // prevent it from well... bugging lol
-        targetActor.shield = 0f;
-        
-
-        // since house is pretty much the only thing that can be destroyed
-        // in-game for team 2, we use house
-        if(targetActor.team == 2 && targetActor.shield <= 0)
-        {
-            target.GetComponent<DestroyCity>().ShieldDestroyed();
-        }
-
-        // as long as the health of our actor is still above 0, it is still
-        // capable of destroying
-        while(targetActor.health >= 0f && health >= 0)
-        {
-            if(team == 0)
-                StartCoroutine(EnemyAttack(target));
-            // attack the target
-            // we weaken the hitpoint since shields make the hitpoints stronger
-            targetActor.HitHealth(hitpoints);
-            targetActor.healthBar.SetHealth(targetActor.health);
-            // wait until we attack again
-            yield return new WaitForSeconds(attackRate);
-        }
-
-        targetActor.DestroyActor(target);
-    }
-
-    // attack
-    void Attack(GameObject target)
-    {
-        if(team == 0)
-        {
-            StartCoroutine(TeamEnemyAttack(target));
-        }
-    }
-
-    public void HitShield(float hitpoints)
-    {
+    public void HitShield(float hitpoints) {
         shield = shield - (hitpoints - (hitpoints * 0.5f));
     }
 
-    public void HitHealth(float hitpoints)
-    {
+    public void HitHealth(float hitpoints) {
         health = health - hitpoints;
-
-        // since the house is pretty much the only team that
-        // can be destroyed, we use house
     }
 
-    public void DestroyActor(GameObject target)
-    {
+    public void DestroyActor(GameObject target) {
         //Debug.Log("Actor Destroyed");
-        if(target.GetComponent<Actor>().team == 0)
-        {
+        if(target.GetComponent<Actor>().team == 0) {
             Debug.Log("Destroying the enemy");
             // increment number of destroyed enemies
             EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
@@ -236,20 +211,22 @@ public class Actor : MonoBehaviour
             GetComponent<TowerShooting>().currentTarget = null;
             Destroy(target);
         }
-        if(target.GetComponent<Actor>().team == 2)
-        {
+        if(target.GetComponent<Actor>().team == 2) {
             target.GetComponent<DestroyCity>().CityDestroyed();
-        }
-            
+        }     
     }
 
     // attack animation
-    IEnumerator EnemyAttack(GameObject target)
-    {
+    IEnumerator EnemyAttack(GameObject target) {
         Vector3 initialPosition = gameObject.transform.position;
         gameObject.transform.position += transform.up * Time.deltaTime * 30.7f;
         yield return new WaitForSeconds(attackRate * 0.1f); // 10% of the attack rate
         // go back
         gameObject.transform.position = initialPosition;
+    }
+
+    IEnumerator WaitUntilAttack() {
+        yield return new WaitForSeconds(attackRate);
+        canAttack = true;
     }
 }

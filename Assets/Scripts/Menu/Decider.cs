@@ -34,14 +34,12 @@ public class Decider : MonoBehaviour{
         // Debug.Log("HP IS"+ houseHp);
         if (houseHp <= 0){
             // set active stage defeat menu
-            background.SetActive(true);
-            defeatMenu.SetActive(true);
+            StartCoroutine(DefeatSetter());
         }
         // Max enemy spawn (calculate this) and number of killed enemies (calculate this? idk lol)
         if (sum == enemySpawner.enemiesKilled) {
              // set active stage victory menu
-            background.SetActive(true);
-            victoryMenu.SetActive(true);
+            StartCoroutine(VictorySetter());
         }
         
     }
@@ -57,4 +55,15 @@ public class Decider : MonoBehaviour{
         SceneManager.LoadScene(0);
     }
 
+    IEnumerator DefeatSetter() {
+        yield return new WaitForSeconds(3.5f);
+        background.SetActive(true);
+        defeatMenu.SetActive(true);
+    }
+
+    IEnumerator VictorySetter() {
+        yield return new WaitForSeconds(3.5f);
+        background.SetActive(true);
+        victoryMenu.SetActive(true);
+    }
 }
