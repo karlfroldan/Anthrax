@@ -21,6 +21,8 @@ public class Actor : MonoBehaviour
     */
     public int team;
 
+    public int value;
+
     public HealthBar healthBar;
     public ShieldBar shieldBar;
 
@@ -46,8 +48,13 @@ public class Actor : MonoBehaviour
 
     private bool canAttack;
     private GameObject currentTarget;
+
+    private Coins coins;
     // Start is called before the first frame update
     void Start() {
+        GameObject coinObject = GameObject.Find("CoinText");
+        coins = coinObject.GetComponent<Coins>();
+
         if (team == 0) {
             canAttack = false;
         } else if (team == 1) {
@@ -192,12 +199,14 @@ public class Actor : MonoBehaviour
     public void DestroyActor(GameObject target) {
         //Debug.Log("Actor Destroyed");
         if(target.GetComponent<Actor>().team == 0) {
-            Debug.Log("Destroying the enemy");
+            
+            //Debug.Log("Destroying the enemy");
             // increment number of destroyed enemies
             EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
             enemySpawner.enemiesKilled++; 
-            Debug.Log("enemiesKilled: " + enemySpawner.enemiesKilled);
+            //Debug.Log("enemiesKilled: " + enemySpawner.enemiesKilled);
             Actor enemyActor = target.GetComponent<Actor>();
+            coins.AddCoins(enemyActor.value);
             // set hitpoints to 0
             enemyActor.hitpoints = 0;
             // set attack rate to 0

@@ -6,30 +6,29 @@ using System.Linq;
 public class DraggingAndDropping : MonoBehaviour{
     public bool isDraggable = true;
     public int price;
-    public bool isDragged = false;
     public float colliderRadius;
 
-    private double pos_x;       // will be updated constantly
-    private double pos_y;        // will be updated constantly
+    public int value;
 
     private double original_pos_x;      // use this to snapback to original x position
     private double original_pos_y;       // use this to snapback to original y position
 
     private bool isSticked = false;
     private bool isSnapped = false;
-    private bool isReleased;
+    private bool isMovable = false;
     // list of platforms to be used
     public GameObject platforms;
     private List<GameObject> platformList;
+    private Coins coins;
 
-    void Start()
-    {
+    void Start() {
+        GameObject coinObject = GameObject.Find("CoinText");
+        coins = coinObject.GetComponent<Coins>();
+
         Vector3 positions = transform.position;
         original_pos_x = positions.x;
-        pos_x = positions.x;
 
         original_pos_y = positions.y;
-        pos_y = positions.y;
 
         // get all the platforms. This should be the child
         List<Transform> childs = platforms.transform.Cast<Transform>().ToList();
@@ -42,83 +41,81 @@ public class DraggingAndDropping : MonoBehaviour{
         }
     }
 
-    private bool check(float x, float y) {
-        if ( (this.pos_x <= x+1.5 && this.pos_x >= x-1.5) && (this.pos_y <= y+1.5 && this.pos_y >= y-1.5) ){
-            return true;
-        }
-
-        return false;
+    private bool IsNearObject(Vector2 objPos) {
+        return (transform.position.x <= objPos.x + 1.5f && transform.position.x  >= objPos.x - 1.5f) && 
+               (transform.position.y <= objPos.y + 1.5f && transform.position.y  >= objPos.y - 1.5f);
     }
+
     void Update(){
+        /* Handle Screen Touch */
+        if (Input.touchCount > 0) { /* If we have more than 0 screen touches */
+            Touch touch = Input.GetTouch(0);
+            Vector3 sToPoint = (Vector2) Camera.main.ScreenToWorldPoint(touch.position);
 
-        if (this.isDragged){
-            transform.position = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            /* If we're touching near this object and it can be dragged */
+            if (IsNearObject(sToPoint) && isDraggable) {
+                /* We begin touching the object */
+                if (touch.phase == TouchPhase.Began) {
+                    isMovable = true;
+                }
 
-        }    
-        else {
-            /*
-             * For each platform, check if the platform's positions is the same as the tower.
-             * If it is, then we make sure that it already is sticked and it is not draggable anymore.
-             */
-            foreach(GameObject pform in platformList)
-            {
-                if(check(pform.transform.position.x, pform.transform.position.y))
-                {
-                    transform.position = pform.transform.position;
-                    isSticked = true;
-                    isDraggable = false;
+                /* And we're dragging the object */
+                if (touch.phase == TouchPhase.Moved && isMovable) {
+                    transform.position = new Vector3(sToPoint.x, sToPoint.y, 0.0f);
+                }
+
+                /* When we lift the finger */
+                if (touch.phase == TouchPhase.Ended) {
+                    GameObject nearestPlatform = GetNearestPlatform();
+                    /* Snap it to the platform if we ended near it */
+                    /* And if we have enough number of coins */
+                    if (nearestPlatform != null && coins.HasEnoughCoins(value)) { 
+                        coins.DecreaseCoins(value);
+                        transform.position = nearestPlatform.transform.position;
+                        isSticked = true;
+                        isDraggable = false;
+                        CreateAnother();
+                        Platform platform = nearestPlatform.GetComponent<Platform>();
+                        platform.AttachToTower(gameObject);
+                    } else { /* Or else, snap it back to its original position and don't let it near a platform */
+                        transform.position = new Vector3((float) original_pos_x, (float) original_pos_y, 0.0f);
+                    }
+                    isMovable = false;
+                }
+            } else {
+                /* If we accidentally dropped the tower */
+                if (isMovable && isDraggable && GetNearestPlatform() == null) {
+                    isMovable = false;
+                    transform.position = new Vector3((float) original_pos_x, (float) original_pos_y, 0.0f);
                 }
             }
         }
-
-        if(!this.isSticked && !this.isDragged) {
-            transform.position = new Vector2((float)original_pos_x, (float)original_pos_y);    
-        }
-
-        this.pos_x = transform.position.x;
-        this.pos_y = transform.position.y;
-
-        // KARL THIS IS YOUR CODE
-        // if it is sticked and hasn't snapped yet
-        if(this.isSticked && !isSnapped)
-        {
-            // create a GameObject that does the shooting
-            GameObject towerShooterObject = new GameObject("Tower Shooter Object");
-            towerShooterObject.AddComponent<TowerShooting>();
-            TowerShooting towerShooter = towerShooterObject.GetComponent<TowerShooting>();
-            Debug.Log("Game Object name: " + gameObject.name);
-            towerShooter.parentName = gameObject.name;
-            towerShooter.SetColliderRadius(colliderRadius);
-            towerShooter.SetPosition(gameObject.transform.position);
-            // then make it snapped
-            // to prevent making the object above repeatedly :P 
-            isSnapped = true;
-
-            // then create another instance of this object
-            CreateAnother();
-        }
-        
-        // END OF YOUR CODE
-
-    }
-    private void OnMouseOver(){
-        if (isDraggable && Input.GetMouseButtonDown(0)) {
-            isDragged = true;
-        }
-    }
-    private void OnMouseUp(){
-        isDragged = false;
     }
 
-    private void CreateAnother()
-    {
+    private void CreateAnother() {
         Vector3 newPosition = new Vector3((float)original_pos_x, (float)original_pos_y, 0f);
         GameObject newTower = (GameObject)Instantiate(gameObject, newPosition, transform.rotation);
         // then set some values
         DraggingAndDropping newDragDrop = newTower.GetComponent<DraggingAndDropping>();
         newDragDrop.isDraggable = true;
-        newDragDrop.isDragged = false;
         newDragDrop.isSnapped = false;
+        newDragDrop.isMovable = false;
     }
 
+    public void SetSnapped(bool set) {
+        isSnapped = set;
+    }
+
+    private GameObject GetNearestPlatform() {
+        GameObject nearestPlatform = null;
+
+        foreach (GameObject pform in platformList) {
+            Vector2 pFormPos = (Vector2) pform.transform.position;
+            if (IsNearObject(pFormPos)) {
+                nearestPlatform = pform;
+                break;
+            }
+        }
+        return nearestPlatform;
+    }
 }

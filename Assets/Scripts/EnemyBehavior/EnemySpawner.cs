@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         totalEnemies = waves.Sum();
-        Debug.Log("total enemies: " + totalEnemies);
+        //Debug.Log("total enemies: " + totalEnemies);
         // set the position of the enposition
         enposition = gameObject.transform.position;
         
@@ -89,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
             // prevent out of bounds exception
             if (currWave < waves.Length) {
                 if (AllEnemiesInWaveAreDead(currWave) && !waveJustSetToFalse) {
-                    Debug.Log("AllEnemiesInWaveAreDead?" + AllEnemiesInWaveAreDead(currWave));
+                    //Debug.Log("AllEnemiesInWaveAreDead?" + AllEnemiesInWaveAreDead(currWave));
                     
                     waveIsActive = false;
                     waveJustSetToFalse = true;
@@ -104,7 +104,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator StartNewWave() {
         //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        //Debug.Log("Started Coroutine at timestamp : " + Time.time);
         if (currWave == 1 || currWave == 0) {
             yield return new WaitForSeconds(5);
         } else {
@@ -115,8 +115,8 @@ public class EnemySpawner : MonoBehaviour
             WaveUI.SetActive(false);
         }
         //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-        Debug.Log("Reset enemiesInWave | " + Time.time);
+        //Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        //Debug.Log("Reset enemiesInWave | " + Time.time);
         enemiesInWave = 0; // reset the counter
 
         
@@ -129,7 +129,7 @@ public class EnemySpawner : MonoBehaviour
         // Instantiate a random enemy.
         if (enemiesInWave < waves[currWave - 1] && spew)
         {
-            Debug.Log("From addEnemy enemies in wave: " + enemiesInWave + " |current wave max: " + waves[currWave - 1]);
+            //Debug.Log("From addEnemy enemies in wave: " + enemiesInWave + " |current wave max: " + waves[currWave - 1]);
             // we instantiate a random enemy(chosen from the Unity editor)
             int enemyIndex = Random.Range(0, enemies.Length);
             int enposIndex = Random.Range(0, enpositions.Count);

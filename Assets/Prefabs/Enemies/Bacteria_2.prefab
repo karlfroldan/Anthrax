@@ -165,8 +165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+  value: 2
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
+  projectile: {fileID: 0}
   shield: 40
   health: 100
   attackRate: 2

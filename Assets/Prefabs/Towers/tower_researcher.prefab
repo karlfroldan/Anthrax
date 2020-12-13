@@ -140,6 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDraggable: 1
   price: 150
-  isDragged: 0
   colliderRadius: 7.98
+  value: 2
   platforms: {fileID: 0}
