@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    private int coins;
+    public int coins;
     // Start is called before the first frame update
     void Start() {
-        coins = 6;
         GetComponent<TMPro.TextMeshProUGUI>().text = "Coins: " + coins;
     }
 

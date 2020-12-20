@@ -13273,6 +13273,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1347270164815113017, guid: cd3c6fc907b81324b9fdf6e0fad2b76d,
+        type: 3}
+      propertyPath: coins
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3c6fc907b81324b9fdf6e0fad2b76d, type: 3}
 --- !u!1001 &3512340528792051623
@@ -13402,6 +13407,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2960832795514457362, guid: ef85cc70b92b782469ff5f3cb8bc0a66,
         type: 3}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
+      propertyPath: hasBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_Name
