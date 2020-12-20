@@ -362,6 +362,70 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4788744884942875433}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &130095722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130095721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radius: 1.05
+  height: 2
+  repathRate: 0.5
+  canSearch: 1
+  canMove: 1
+  maxSpeed: 1.3
+  gravity: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  centerOffsetCompatibility: NaN
+  orientation: 1
+  enableRotation: 1
+  targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
+  rotationSpeed: 360
+  slowdownDistance: 0.7
+  pickNextWaypointDist: 0.95
+  endReachedDistance: 0.2
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
+  constrainInsideGraph: 0
+--- !u!114 &130095723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130095721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &196075310
 GameObject:
   m_ObjectHideFlags: 0
@@ -13332,6 +13396,12 @@ PrefabInstance:
       propertyPath: WaveUI
       value: 
       objectReference: {fileID: 973138942}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 2960832795514457362, guid: ef85cc70b92b782469ff5f3cb8bc0a66,
+        type: 3}
     - target: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_Name
@@ -13340,12 +13410,12 @@ PrefabInstance:
     - target: {fileID: 4788744884026697321, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.37
+      value: -24.94
       objectReference: {fileID: 0}
     - target: {fileID: 4788744884026697321, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.56
+      value: -2.71
       objectReference: {fileID: 0}
     - target: {fileID: 4788744884026697321, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}

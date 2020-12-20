@@ -7,6 +7,7 @@ public class DraggingAndDropping : MonoBehaviour{
     public bool isDraggable = true;
     public int price;
     public float colliderRadius;
+    private PauseMenu pauseMenu;
 
     public int value;
 
@@ -23,6 +24,7 @@ public class DraggingAndDropping : MonoBehaviour{
 
     void Start() {
         GameObject coinObject = GameObject.Find("CoinText");
+        pauseMenu = GameObject.Find("PCanvas").GetComponent<PauseMenu>();
         coins = coinObject.GetComponent<Coins>();
 
         Vector3 positions = transform.position;
@@ -34,9 +36,7 @@ public class DraggingAndDropping : MonoBehaviour{
         List<Transform> childs = platforms.transform.Cast<Transform>().ToList();
         platformList = new List<GameObject>();
         // then add this to the platformList
-        foreach(Transform child in childs)
-        {
-            Debug.Log("child name: " + child.gameObject.name);
+        foreach(Transform child in childs) {
             platformList.Add(child.gameObject);
         }
     }
@@ -51,9 +51,10 @@ public class DraggingAndDropping : MonoBehaviour{
         if (Input.touchCount > 0) { /* If we have more than 0 screen touches */
             Touch touch = Input.GetTouch(0);
             Vector3 sToPoint = (Vector2) Camera.main.ScreenToWorldPoint(touch.position);
+            bool isNotPaused = !pauseMenu.isPaused;
 
             /* If we're touching near this object and it can be dragged */
-            if (IsNearObject(sToPoint) && isDraggable) {
+            if (IsNearObject(sToPoint) && isDraggable && isNotPaused) {
                 /* We begin touching the object */
                 if (touch.phase == TouchPhase.Began) {
                     isMovable = true;

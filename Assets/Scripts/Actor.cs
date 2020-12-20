@@ -12,9 +12,9 @@ using System.Linq;
 
 public class Actor : MonoBehaviour
 {
+    private EnemySpawner enemySpawner;
     /*
         Teams include:
-            3- boss
             2- house
             1- player
             0- enemy
@@ -52,6 +52,7 @@ public class Actor : MonoBehaviour
     private Coins coins;
     // Start is called before the first frame update
     void Start() {
+        enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         GameObject coinObject = GameObject.Find("CoinText");
         coins = coinObject.GetComponent<Coins>();
 
@@ -64,7 +65,7 @@ public class Actor : MonoBehaviour
 
     void Update() {
         if (team == 0) {
-            // if the enemy can attack
+            /* If the enemy can attack */
             if (canAttack) {
                 Actor targetActor = currentTarget.GetComponent<Actor>();
 
@@ -151,9 +152,7 @@ public class Actor : MonoBehaviour
         {
             TowerShooting towerShooting = GetComponent<TowerShooting>();
 
-            if(towerShooting.currentTarget == col.gameObject)
-            {
-                Debug.Log("No more target.");
+            if(towerShooting.currentTarget == col.gameObject) {
                 towerShooting.currentTarget = null;
             }
         }
