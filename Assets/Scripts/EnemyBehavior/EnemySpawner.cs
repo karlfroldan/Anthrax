@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     // collection of enemy prefabs
     public GameObject[] enemies;
+    public GameObject boss;
     // the attached waypoint we have.
     private Vector3 enposition = new Vector3(0, 0, 0);
     private List<Vector3> enpositions = new List<Vector3>();
@@ -40,6 +41,10 @@ public class EnemySpawner : MonoBehaviour
     private int totalEnemies;
     private bool spew = false;
 
+    private bool isLastWave;
+    private bool finishedSpawningAllEnemies = false;
+    private bool hasSpawnedBoss = false;
+
     public GameObject destination;
 
     // Start is called before the first frame update
@@ -49,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
         //Debug.Log("total enemies: " + totalEnemies);
         // set the position of the enposition
         enposition = gameObject.transform.position;
-        
+        Debug.Log("waves length:" + waves.Length);
 
         // create 5 random enpositions
         foreach (int value in Enumerable.Range(0, 5))
@@ -75,7 +80,12 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void Update() {
-        // Start the first wave
+        /* Check if last wave */
+        isLastWave = waves.Length == currWave;
+        finishedSpawningAllEnemies = isLastWave && (enemiesInWave == waves[waves.Length - 1]);
+        Debug.Log("FinishedSpawningAllEnemies? " + finishedSpawningAllEnemies);
+
+        /* Start the first wave */
         if (!waveIsActive) {
             StartCoroutine(StartNewWave());
             //InvokeRepeating("addEnemy", spawnDelay, spawnTime);
@@ -83,14 +93,12 @@ public class EnemySpawner : MonoBehaviour
             waveJustSetToFalse = false;
             
         } else {
-            // if a wave is currently active
-                
-            /// check to see if all the enemies in the wave are dead
-            // prevent out of bounds exception
+            /* A Wave is currently active */
+
+            /* Check to see if all the enemies in the wave are dead */
+            /* Prevent out of bounds exception */
             if (currWave < waves.Length) {
-                if (AllEnemiesInWaveAreDead(currWave) && !waveJustSetToFalse) {
-                    //Debug.Log("AllEnemiesInWaveAreDead?" + AllEnemiesInWaveAreDead(currWave));
-                    
+                if (AllEnemiesInWaveAreDead(currWave) && !waveJustSetToFalse) {                  
                     waveIsActive = false;
                     waveJustSetToFalse = true;
                     spew = false;
@@ -99,6 +107,20 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
             
+        }
+
+        if (finishedSpawningAllEnemies && !hasSpawnedBoss) {
+            /* We can spawn the boss now */
+            Debug.Log("We can spawn the boss now");
+            int enposIndex = Random.Range(0, enpositions.Count);
+
+            GameObject newBoss = (GameObject) Instantiate(boss,
+                enpositions[enposIndex], transform.rotation);
+            newBoss.GetComponent<Pathfinding.AIPath>().canMove=true;
+            newBoss.GetComponent<Pathfinding.AIDestinationSetter>().target = destination.transform; 
+            newBoss.AddComponent<Pathfinding.SimpleSmoothModifier>();
+
+            hasSpawnedBoss = true;
         }
     }
 
@@ -121,15 +143,13 @@ public class EnemySpawner : MonoBehaviour
 
         
         spew = true;
-        InvokeRepeating("addEnemy", spawnDelay, spawnTime);
+        
+        InvokeRepeating("AddEnemy", spawnDelay, spawnTime);
     }
 
-    void addEnemy()
-    {
+    void AddEnemy() {
         // Instantiate a random enemy.
-        if (enemiesInWave < waves[currWave - 1] && spew)
-        {
-            //Debug.Log("From addEnemy enemies in wave: " + enemiesInWave + " |current wave max: " + waves[currWave - 1]);
+        if (enemiesInWave < waves[currWave - 1] && spew) {
             // we instantiate a random enemy(chosen from the Unity editor)
             int enemyIndex = Random.Range(0, enemies.Length);
             int enposIndex = Random.Range(0, enpositions.Count);
@@ -150,5 +170,9 @@ public class EnemySpawner : MonoBehaviour
             enemiesInWave++;
             ++numEnemy;
         }
+    }
+
+    public int GetWave() {
+        return currWave;
     }
 }
