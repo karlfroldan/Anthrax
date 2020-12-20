@@ -24,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
 
     // collection of enemy prefabs
     public GameObject[] enemies;
+
+    public bool hasBoss;
     public GameObject boss;
     // the attached waypoint we have.
     private Vector3 enposition = new Vector3(0, 0, 0);
@@ -78,6 +80,9 @@ public class EnemySpawner : MonoBehaviour
         }
         return runningSum - enemiesKilled == 0;
     }
+    public int GetCurrentWave() {
+        return currWave;
+    }
 
     void Update() {
         /* Check if last wave */
@@ -109,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
             
         }
 
-        if (finishedSpawningAllEnemies && !hasSpawnedBoss) {
+        if (finishedSpawningAllEnemies && !hasSpawnedBoss && hasBoss) {
             /* We can spawn the boss now */
             Debug.Log("We can spawn the boss now");
             int enposIndex = Random.Range(0, enpositions.Count);
