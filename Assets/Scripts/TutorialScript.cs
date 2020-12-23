@@ -21,17 +21,16 @@ public class TutorialScript : MonoBehaviour
     }
 
     void Update(){
-        int currentWave = enemySpawner.GetCurrentWave();
-        int enemiesInWave = enemySpawner.waves[currentWave];
         int enemiesKilled = enemySpawner.enemiesKilled;
-
-        if (currentWave == 1 && enemiesInWave == enemiesKilled && !check){
+        Debug.Log("enemiesKilled: " + enemiesKilled);
+        Debug.Log("check: " + check);
+        if (2 == enemiesKilled && !check){
             bg.SetActive(true);
             ins2.SetActive(true);
             check = true;
         }
 
-        if (currentWave == 2 && 5 == enemiesKilled && check){
+        if (5 == enemiesKilled && check){
             bg.SetActive(true);
             ins3.SetActive(true);
             check = false;

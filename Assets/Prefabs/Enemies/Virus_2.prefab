@@ -236,6 +236,8 @@ MonoBehaviour:
   enemies:
   - House_1
   instanceName: Virus_2
+  destroyAnimation: {fileID: 8048859713814180470, guid: c1924a0124489484dbd2b91190cf16ab,
+    type: 3}
 --- !u!50 &1494907736422965615
 Rigidbody2D:
   serializedVersion: 4

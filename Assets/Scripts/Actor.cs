@@ -48,6 +48,7 @@ public class Actor : MonoBehaviour
 
     private bool canAttack;
     private GameObject currentTarget;
+    public GameObject destroyAnimation;
 
     private Coins coins;
     // Start is called before the first frame update
@@ -196,15 +197,15 @@ public class Actor : MonoBehaviour
     }
 
     public void DestroyActor(GameObject target) {
-        //Debug.Log("Actor Destroyed");
+        Actor enemyActor = target.GetComponent<Actor>();
+        if (enemyActor.destroyAnimation != null) {
+            Instantiate(enemyActor.destroyAnimation, target.transform.position, Quaternion.identity);
+        }
+        
         if(target.GetComponent<Actor>().team == 0) {
-            
-            //Debug.Log("Destroying the enemy");
-            // increment number of destroyed enemies
+            /* Increment the number of spawned enemies */
             EnemySpawner enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
             enemySpawner.enemiesKilled++; 
-            //Debug.Log("enemiesKilled: " + enemySpawner.enemiesKilled);
-            Actor enemyActor = target.GetComponent<Actor>();
             coins.AddCoins(enemyActor.value);
             // set hitpoints to 0
             enemyActor.hitpoints = 0;
@@ -221,7 +222,7 @@ public class Actor : MonoBehaviour
         }
         if(target.GetComponent<Actor>().team == 2) {
             target.GetComponent<DestroyCity>().CityDestroyed();
-        }     
+        }
     }
 
     // attack animation

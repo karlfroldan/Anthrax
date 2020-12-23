@@ -5,7 +5,6 @@ using System.Linq;
 
 public class DraggingAndDropping : MonoBehaviour{
     public bool isDraggable = true;
-    public int price;
     public float colliderRadius;
     private PauseMenu pauseMenu;
 

@@ -141,5 +141,5 @@ MonoBehaviour:
   isDraggable: 1
   price: 150
   colliderRadius: 7.98
-  value: 2
+  value: 5
   platforms: {fileID: 0}
