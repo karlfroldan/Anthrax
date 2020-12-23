@@ -69,7 +69,10 @@ public class EnemySpawner : MonoBehaviour
             enpositions.Add(newEnposition);
         }
 
-        
+        if (hasBoss) {
+            /* We have another enemy if there exists such a boss */
+            waves[waves.Length - 1] += 1;
+        }        
     }
 
     bool AllEnemiesInWaveAreDead(int wave) {
@@ -88,7 +91,6 @@ public class EnemySpawner : MonoBehaviour
         /* Check if last wave */
         isLastWave = waves.Length == currWave;
         finishedSpawningAllEnemies = isLastWave && (enemiesInWave == waves[waves.Length - 1]);
-        Debug.Log("FinishedSpawningAllEnemies? " + finishedSpawningAllEnemies);
 
         /* Start the first wave */
         if (!waveIsActive) {

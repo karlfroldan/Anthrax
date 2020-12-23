@@ -176,6 +176,8 @@ MonoBehaviour:
   enemies:
   - House_1
   instanceName: Bacteria_1
+  destroyAnimation: {fileID: 8048859713814180470, guid: c1924a0124489484dbd2b91190cf16ab,
+    type: 3}
 --- !u!1 &8833194328290433327
 GameObject:
   m_ObjectHideFlags: 0

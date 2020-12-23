@@ -244,9 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c70d72706be5ba48b24c4695de9a8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bg: {fileID: 0}
-  ins2: {fileID: 0}
-  ins3: {fileID: 0}
+  bg: {fileID: 656361203}
+  ins2: {fileID: 673793130}
+  ins3: {fileID: 152718201}
 --- !u!4 &109569659
 Transform:
   m_ObjectHideFlags: 0
@@ -672,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.82
+      value: 6.31
       objectReference: {fileID: 0}
     - target: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
         type: 3}
@@ -6329,12 +6329,12 @@ PrefabInstance:
     - target: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.82
+      value: 6.4
       objectReference: {fileID: 0}
     - target: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.27
+      value: 3.31
       objectReference: {fileID: 0}
     - target: {fileID: 4914815620453296331, guid: d59d23941c414cc459794210cc30826c,
         type: 3}
@@ -6935,7 +6935,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Back to Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -6963,7 +6963,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37
+  m_fontSize: 34.5
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8123,8 +8123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 307, y: -80.1}
-  m_SizeDelta: {x: 194.93561, y: 71.94934}
+  m_AnchoredPosition: {x: 339.7, y: -80.1}
+  m_SizeDelta: {x: 237.42468, y: 71.94934}
   m_Pivot: {x: 0.76881075, y: 1.5391417}
 --- !u!114 &1544656284
 MonoBehaviour:
@@ -8181,8 +8181,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 152718201}
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 109569658}
+        m_MethodName: loadMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

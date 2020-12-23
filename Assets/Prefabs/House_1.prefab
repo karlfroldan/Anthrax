@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 2
+  value: 0
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
   projectile: {fileID: 0}
@@ -132,6 +133,8 @@ MonoBehaviour:
   hitpoints: 0
   enemies: []
   instanceName: House_Target
+  destroyAnimation: {fileID: 8048859713814180470, guid: c1924a0124489484dbd2b91190cf16ab,
+    type: 3}
 --- !u!114 &3512340528627207563
 MonoBehaviour:
   m_ObjectHideFlags: 0
