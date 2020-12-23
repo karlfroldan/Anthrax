@@ -271,8 +271,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
   projectile: {fileID: 0}
-  shield: 40
-  health: 100
+  shield: 60
+  health: 300
   attackRate: 2
   hitpoints: 3.1
   enemies:
