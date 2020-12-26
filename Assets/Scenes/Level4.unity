@@ -11685,6 +11685,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
+      propertyPath: waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
       propertyPath: destination
       value: 
       objectReference: {fileID: 1625461377}
@@ -11704,6 +11709,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2960832795514457362, guid: c1addfd4eae408b43b1566b9cba32e62,
         type: 3}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
+      propertyPath: waves.Array.data[1]
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
+      propertyPath: waves.Array.data[2]
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788744884026697238, guid: b7e411dfa5d32e54c9902543f94ab993,
+        type: 3}
+      propertyPath: waves.Array.data[0]
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4788744884026697239, guid: b7e411dfa5d32e54c9902543f94ab993,
         type: 3}
       propertyPath: m_Name

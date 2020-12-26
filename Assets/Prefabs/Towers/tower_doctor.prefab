@@ -125,7 +125,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5021458674840193840, guid: 46f5d5953b8f61946bcb7362e83028eb,
     type: 3}
   attackRate: 1.7
-  hitpoints: 24.76
+  hitpoints: 56.87
 --- !u!114 &9014988746424077067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDraggable: 1
-  price: 200
   colliderRadius: 6.42
   value: 7
   platforms: {fileID: 0}
